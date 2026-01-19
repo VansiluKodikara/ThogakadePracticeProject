@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="555.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerFormController">
+<AnchorPane prefHeight="555.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customer.CustomerFormController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="708.0" />
         <Label layoutX="286.0" layoutY="11.0" text="Customer Form" textFill="WHITE">

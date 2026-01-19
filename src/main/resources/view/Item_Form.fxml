@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,46 +9,46 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="563.0" prefWidth="684.0" style="-fx-background-color: 08CB00;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemFormController">
+<AnchorPane prefHeight="563.0" prefWidth="684.0" style="-fx-background-color: 08CB00;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.item.ItemFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#61cf0c" height="49.0" layoutX="7.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="675.0" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="16.0" prefHeight="25.0" prefWidth="656.0" text="Item Form">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="49.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="686.0" />
+      <Label alignment="CENTER" layoutX="13.0" layoutY="9.0" prefHeight="25.0" prefWidth="656.0" text="Item Form" textFill="#fffdfd">
          <font>
-            <Font name="System Bold Italic" size="30.0" />
+            <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnAddtem" layoutX="563.0" layoutY="257.0" onAction="#btnAddItemOnAction" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #08CB00;" text="Add Item">
+      <JFXButton fx:id="btnAddItem" layoutX="563.0" layoutY="257.0" onAction="#btnAddItemOnAction" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #27ae60;" text="Add Item" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="txtId" layoutX="34.0" layoutY="110.0" prefHeight="25.0" prefWidth="176.0" promptText="Id" />
-      <JFXTextField fx:id="txtName" layoutX="226.0" layoutY="110.0" prefHeight="25.0" prefWidth="176.0" promptText="Name" />
-      <JFXTextField fx:id="txtPrice" layoutX="440.0" layoutY="110.0" prefHeight="25.0" prefWidth="176.0" promptText="price" />
-      <JFXTextField fx:id="txtQuantity" layoutX="34.0" layoutY="170.0" prefHeight="25.0" prefWidth="159.0" promptText="Quantity" />
-      <JFXButton fx:id="btnReload" layoutX="446.0" layoutY="257.0" onAction="#btnReloadOnAction" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: orange;" text="Reload">
+      <JFXTextField fx:id="txtItemCode" layoutX="34.0" layoutY="110.0" prefHeight="25.0" prefWidth="176.0" promptText="Item Code" />
+      <JFXTextField fx:id="txtDescription" layoutX="226.0" layoutY="110.0" prefHeight="25.0" prefWidth="176.0" promptText="Description" />
+      <JFXTextField fx:id="txtPackSize" layoutX="440.0" layoutY="110.0" prefHeight="25.0" prefWidth="176.0" promptText="Pack Size" />
+      <JFXTextField fx:id="txtUnitPrice" layoutX="34.0" layoutY="170.0" prefHeight="25.0" prefWidth="159.0" promptText="Unit Price" />
+      <JFXButton fx:id="btnReload" layoutX="446.0" layoutY="257.0" onAction="#btnReloadOnAction" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #f1c40f;" text="Reload" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="328.0" layoutY="257.0" onAction="#btnDeleteOnAction" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: red;" text="Delete">
+      <JFXButton fx:id="btnDelete" layoutX="328.0" layoutY="257.0" onAction="#btnDeleteOnAction" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #c0392b;" text="Delete" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="12.0" />
          </font></JFXButton>
-      <JFXComboBox fx:id="cmbCategory" layoutX="214.0" layoutY="170.0" prefHeight="25.0" prefWidth="159.0" />
-      <JFXButton fx:id="btnSearch" layoutX="212.0" layoutY="257.0" onAction="#btnSearchOnAction" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: blue;" text="Search">
+      <JFXButton fx:id="btnSearch" layoutX="212.0" layoutY="257.0" onAction="#btnSearchOnAction" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #3498db;" text="Search" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tableProduct" layoutX="34.0" layoutY="308.0" prefHeight="200.0" prefWidth="630.0">
+      <TableView fx:id="tableItems" layoutX="34.0" layoutY="308.0" prefHeight="200.0" prefWidth="630.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="102.0" text="Id" />
-          <TableColumn fx:id="colName" minWidth="0.0" prefWidth="123.0" text="Name" />
-            <TableColumn fx:id="colPrice" prefWidth="126.0" text="Price" />
-            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="123.0" text="Quantity" />
-            <TableColumn fx:id="colCategory" minWidth="0.0" prefWidth="155.0" text="Category" />
+          <TableColumn fx:id="colItemCode" prefWidth="102.0" text="Item Code" />
+          <TableColumn fx:id="colDescription" minWidth="0.0" prefWidth="123.0" text="Description" />
+            <TableColumn fx:id="colPckSize" prefWidth="126.0" text="Pack Size" />
+            <TableColumn fx:id="colUnitPrice" minWidth="0.0" prefWidth="123.0" text="Unit Price" />
+            <TableColumn fx:id="colQOnHand" minWidth="0.0" prefWidth="155.0" text="Quantity On Hand" />
         </columns>
       </TableView>
+      <JFXTextField fx:id="txtQtyOnHand" layoutX="226.0" layoutY="170.0" prefHeight="25.0" prefWidth="176.0" promptText="Quantity On Hand" />
    </children>
 </AnchorPane>
