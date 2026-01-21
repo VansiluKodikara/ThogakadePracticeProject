@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class DashboardController {
     @FXML
     void btnItemFormOnAction(ActionEvent event) {
         try{
-            URL resource = this.getClass().getResource("/view/Item_form.fxml");
+            URL resource = this.getClass().getResource("/view/Item_Form.fxml");
 
             assert resource!=null;
             Parent parent=FXMLLoader.load(resource);
@@ -42,6 +43,24 @@ public class DashboardController {
             dashRoot.getChildren().add(parent);
         }catch (IOException e){
             throw new RuntimeException(e);
+        }
+
+    }
+
+    @FXML
+    void btnOrderFormOnAction(ActionEvent event){
+        try{
+            URL resource = this.getClass().getResource("/view/Order_Form.fxml");
+
+            assert resource!=null;
+            Parent parent=FXMLLoader.load(resource);
+
+            dashRoot.getChildren().clear();
+            dashRoot.getChildren().add(parent);
+        }catch (IOException e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Cannot load Order Form\n" + e.getMessage()).show();
+            throw new RuntimeException();
         }
 
     }

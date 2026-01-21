@@ -75,7 +75,7 @@ public class ItemFormController  implements Initializable {
         Item item = new Item(ItemCode, Description, PackSize, UnitPrice, QtyOnHand);
 
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("insert into products values(?,?,?,?,?)");
+        PreparedStatement psTm = connection.prepareStatement("INSERT INTO Item values(?,?,?,?,?)");
         System.out.println(connection);
         System.out.println("connected to DB");
         psTm.setString(1,item.getItemCode());
@@ -85,11 +85,11 @@ public class ItemFormController  implements Initializable {
         psTm.setInt(5,item.getQtyOnHand());
 
         if(psTm.executeUpdate()>0){
-            new Alert(Alert.AlertType.INFORMATION,"Product Added").show();
+            new Alert(Alert.AlertType.INFORMATION,"Item Added").show();
             loadTable();
         }
         else{
-            new Alert(Alert.AlertType.ERROR,"Product Not Added").show();
+            new Alert(Alert.AlertType.ERROR,"Item Not Added").show();
         }
 
 
@@ -99,15 +99,15 @@ public class ItemFormController  implements Initializable {
     void btnDeleteOnAction(ActionEvent event) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement psTm = connection.prepareStatement("delete from Products where id=? ");
+            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Item where id=? ");
             psTm.setString(1,txtItemCode.getText());
 
             if(psTm.executeUpdate()>0){
-                new Alert(Alert.AlertType.INFORMATION,"Product Deleted").show();
+                new Alert(Alert.AlertType.INFORMATION,"Item Deleted").show();
                 loadTable();
             }
             else{
-                new Alert(Alert.AlertType.ERROR,"Product Not Deleted").show();
+                new Alert(Alert.AlertType.ERROR,"Item Not Deleted").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -124,7 +124,7 @@ public class ItemFormController  implements Initializable {
     void btnSearchOnAction(ActionEvent event) throws SQLException {
 
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement psTm = connection.prepareStatement("Select * from products where id=?");
+            PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Item where id=?");
             psTm.setString(1,txtItemCode.getText());
             ResultSet resultSet = psTm.executeQuery();
             resultSet.next();
@@ -170,11 +170,11 @@ public class ItemFormController  implements Initializable {
             while(resultSet.next()){
                 itemArrayList.add(
                         new Item(
-                resultSet.getString(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getDouble(4),
-                resultSet.getInt(5)
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getDouble(4),
+                            resultSet.getInt(5)
                         )
                 );
 
