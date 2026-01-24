@@ -8,10 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
-    boolean addCustomer(Order order);
-    boolean updateCustomer(Order order);
-    boolean deleteCustomer(String id);
-    Order searchCustomerById(String id);
+    boolean addOrder(Order order);
+    boolean updateOrder(Order order);
+    boolean deleteOrder(String id);
+    Order searchOrderById(String id);
 
     List<Order> getAll();
 }
