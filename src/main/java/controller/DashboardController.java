@@ -59,6 +59,7 @@ public class DashboardController {
             dashRoot.getChildren().add(parent);
         }catch (IOException e){
             e.printStackTrace();
+            System.out.println("err loading order form" +e.getMessage());
             new Alert(Alert.AlertType.ERROR, "Cannot load Order Form\n" + e.getMessage()).show();
             throw new RuntimeException();
         }

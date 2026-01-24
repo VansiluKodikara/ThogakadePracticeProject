@@ -13,7 +13,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Item;
 import model.Order;
 
 import java.net.URL;
@@ -57,7 +56,7 @@ public class OrderFormController implements Initializable {
     private TableColumn<?, ?> colCustId;
 
     @FXML
-    void btnAddItemOnAction(ActionEvent event) throws SQLException {
+    void btnAddOrderOnAction(ActionEvent event) throws SQLException {
         String OrderId = txtOrderId.getText();
         LocalDate OrderDate = dateOrderDate.getValue();
         String CustomerId = txtCustomerId.getText();
