@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
 
-            PreparedStatement psTm = connection.prepareStatement("DELETE FROM customer WHERE CustID=?");
+            PreparedStatement psTm = connection.prepareStatement("DELETE FROM item WHERE ItemCode=?");
             psTm.setString(1, id);
 
             return psTm.executeUpdate() > 0;
@@ -58,7 +58,7 @@ public class ItemServiceImpl implements ItemService {
 
             Connection connection = DBConnection.getInstance().getConnection();
 
-            PreparedStatement psTM = connection.prepareStatement("SELECT * FROM customer WHERE CustID = ?");
+            PreparedStatement psTM = connection.prepareStatement("SELECT * FROM item WHERE ItemCode = ?");
 
             psTM.setString(1, id);
             ResultSet resultSet = psTM.executeQuery();
@@ -85,7 +85,7 @@ public class ItemServiceImpl implements ItemService {
 
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM item");
 
             ArrayList<Item> itemArrayList = new ArrayList<>();
 
