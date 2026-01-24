@@ -105,7 +105,7 @@ public class CustomerFormController implements Initializable  {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             System.out.println("Connection " + connection);
-            PreparedStatement psTm = connection.prepareStatement("Insert into customer values (?,?,?,?,?,?,?,?,?) ");
+            PreparedStatement psTm = connection.prepareStatement("INSERT INTO Customer values (?,?,?,?,?,?,?,?,?) ");
             psTm.setString(1,customer.getId());
             psTm.setString(2,customer.getTitle());
             psTm.setString(3,customer.getName());
@@ -152,7 +152,7 @@ public class CustomerFormController implements Initializable  {
             Connection connection = DBConnection.getInstance().getConnection();
             System.out.println("Connection " + connection);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from customer");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Customer");
 
             System.out.println(resultSet);
             while (resultSet.next()){
@@ -190,7 +190,7 @@ public class CustomerFormController implements Initializable  {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
 
-            PreparedStatement psTm = connection.prepareStatement("DELETE FROM customer WHERE CustID=?");
+            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Customer WHERE CustID=?");
             psTm.setString(1,txtId.getText());
 
             if(psTm.executeUpdate()>0){
@@ -204,7 +204,7 @@ public class CustomerFormController implements Initializable  {
 
     public void btnSearchOnAction(ActionEvent actionEvent) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("select * from customer where CustId=?");
+        PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Customer WHERE CustId=?");
         psTm.setString(1,txtId.getText());
         ResultSet resultSet = psTm.executeQuery();
         resultSet.next();
