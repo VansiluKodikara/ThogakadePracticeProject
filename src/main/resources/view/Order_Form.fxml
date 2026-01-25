@@ -10,16 +10,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="563.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.order.OrderFormController">
+<AnchorPane prefHeight="555.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.order.OrderFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="52.0" stroke="BLACK" strokeType="INSIDE" width="684.0" />
-      <Label alignment="CENTER" layoutX="285.0" layoutY="11.0" prefHeight="30.0" prefWidth="119.0" text="Order Form" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="52.0" stroke="BLACK" strokeType="INSIDE" width="708.0" />
+      <Label alignment="CENTER" layoutX="294.0" layoutY="11.0" prefHeight="30.0" prefWidth="119.0" text="Order Form" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
       <JFXTextField fx:id="txtOrderId" layoutX="37.0" layoutY="80.0" promptText="Order ID" />
-      <JFXTextField fx:id="txtCustomerId" layoutX="516.0" layoutY="80.0" promptText="Customer ID" />
+      <JFXTextField fx:id="txtCustomerId" layoutX="523.0" layoutY="80.0" promptText="Customer ID" />
       <JFXButton fx:id="btnSearch" layoutX="195.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />

@@ -1,9 +1,7 @@
 package controller.order;
 
 import db.DBConnection;
-import model.Item;
 import model.Order;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
