@@ -9,10 +9,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="563.0" prefWidth="684.0" style="-fx-background-color: 08CB00;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.item.ItemFormController">
+<AnchorPane prefHeight="555.0" prefWidth="708.0" style="-fx-background-color: 08CB00;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.item.ItemFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="49.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="686.0" />
-      <Label alignment="CENTER" layoutX="13.0" layoutY="9.0" prefHeight="25.0" prefWidth="656.0" text="Item Form" textFill="#fffdfd">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="49.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="708.0" />
+      <Label alignment="CENTER" layoutX="26.0" layoutY="9.0" prefHeight="25.0" prefWidth="656.0" text="Item Form" textFill="#fffdfd">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
@@ -40,7 +40,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tableItems" layoutX="34.0" layoutY="308.0" prefHeight="200.0" prefWidth="630.0">
+      <TableView fx:id="tableItems" layoutX="39.0" layoutY="329.0" prefHeight="200.0" prefWidth="630.0">
         <columns>
           <TableColumn fx:id="colItemCode" prefWidth="102.0" text="Item Code" />
           <TableColumn fx:id="colDescription" minWidth="0.0" prefWidth="123.0" text="Description" />

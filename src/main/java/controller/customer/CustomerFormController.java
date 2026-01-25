@@ -186,7 +186,7 @@ public class CustomerFormController implements Initializable  {
 
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
 
