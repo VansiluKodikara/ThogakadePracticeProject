@@ -1,4 +1,4 @@
-package controller.customer;
+package service.custom.impl;
 
 import db.DBConnection;
 import model.Customer;
@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService{
     @Override
     public boolean addCustomer(Customer customer) {
         try {

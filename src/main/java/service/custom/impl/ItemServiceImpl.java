@@ -1,4 +1,4 @@
-package controller.item;
+package service.custom.impl;
 
 import db.DBConnection;
 import model.Item;
@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl implements ItemService{
     public boolean addItem(Item item) {
         try {
 
