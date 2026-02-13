@@ -50,5 +50,8 @@
         </columns>
       </TableView>
       <JFXTextField fx:id="txtQtyOnHand" layoutX="226.0" layoutY="170.0" prefHeight="25.0" prefWidth="176.0" promptText="Quantity On Hand" />
+      <Label fx:id="lblCurrentDate" layoutX="633.0" layoutY="5.0" text="dd/mm/yyyy" textFill="WHITE" />
+      <Label fx:id="lblCurrentTime" layoutX="646.0" layoutY="25.0" text="00:00:00" textFill="WHITE" />
+      <Label fx:id="lblCurrentDay" layoutX="549.0" layoutY="15.0" text="Day" textFill="WHITE" />
    </children>
 </AnchorPane>

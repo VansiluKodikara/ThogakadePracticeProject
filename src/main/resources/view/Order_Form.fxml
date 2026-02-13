@@ -18,8 +18,7 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtOrderId" layoutX="37.0" layoutY="80.0" promptText="Order ID" />
-      <JFXTextField fx:id="txtCustomerId" layoutX="523.0" layoutY="80.0" promptText="Customer ID" />
+      <JFXTextField fx:id="txtOrderId" layoutX="37.0" layoutY="80.0" prefHeight="25.333333333333332" prefWidth="134.66666666666666" promptText="Order ID" />
       <JFXButton fx:id="btnSearch" layoutX="195.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -48,5 +47,9 @@
         </columns>
       </TableView>
       <DatePicker fx:id="dateOrderDate" layoutX="255.0" layoutY="80.0" promptText="Order Date" />
+      <Label fx:id="lblCurrentDate" layoutX="634.0" layoutY="6.0" text="dd/mm/yyyy" textFill="WHITE" />
+      <Label fx:id="lblCurrentTime" layoutX="642.0" layoutY="28.0" text="00:00:00" textFill="WHITE" />
+      <JFXTextField fx:id="txtCustomerId" layoutX="518.0" layoutY="80.0" prefHeight="25.333333333333332" prefWidth="134.66666666666666" promptText="Customer ID" />
+      <Label fx:id="lblCurrentDay" layoutX="555.0" layoutY="16.0" text="Day" textFill="WHITE" />
    </children>
 </AnchorPane>

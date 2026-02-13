@@ -3,22 +3,25 @@ package controller.order;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import model.Order;
 
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class OrderFormController implements Initializable {
@@ -56,11 +59,20 @@ public class OrderFormController implements Initializable {
     private TableColumn<?, ?> colCustId;
 
     @FXML
+    private Label lblCurrentDate;
+
+    @FXML
+    private Label lblCurrentTime;
+
+    @FXML
+    private Label lblCurrentDay;
+
+    @FXML
     void btnAddOrderOnAction(ActionEvent event) throws SQLException {
         String OrderId = txtOrderId.getText();
         LocalDate OrderDate = dateOrderDate.getValue();
         String CustomerId = txtCustomerId.getText();
-        Order order = new Order(OrderId, OrderDate, CustomerId);
+        Order order = new Order(OrderId, OrderDate, CustomerId.toString());
 
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement psTm = connection.prepareStatement("INSERT INTO Orders values(?,?,?,?,?)");
@@ -132,7 +144,6 @@ public class OrderFormController implements Initializable {
 
     ArrayList<Order> orderArrayList=new ArrayList<>();
 
-
     private void loadTable(){
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("OrderId"));
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("OrderDate"));
@@ -163,8 +174,27 @@ public class OrderFormController implements Initializable {
 
     }
 
+    private void loadDateAndTime(){
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
+        lblCurrentDate.setText(dateFormat.format(date));
+
+        lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
+
+        Timeline timeline=new Timeline(new KeyFrame(Duration.ZERO, event ->{
+            LocalTime now=LocalTime.now();
+            lblCurrentTime.setText(now.getHour()+":"+now.getMinute()+":"+now.getSecond());
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
+        loadDateAndTime();
     }
 }
