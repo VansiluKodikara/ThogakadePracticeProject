@@ -3,23 +3,31 @@ package controller.item;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import model.Item;
 
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ItemFormController  implements Initializable {
+public class ItemFormController implements Initializable {
 
     @FXML
     private JFXButton btnAddItem;
@@ -64,6 +72,15 @@ public class ItemFormController  implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colQOnHand;
+
+    @FXML
+    private Label lblCurrentDate;
+
+    @FXML
+    private Label lblCurrentTime;
+
+    @FXML
+    private Label lblCurrentDay;
 
     @FXML
     void btnAddItemOnAction(ActionEvent event) throws SQLException {
@@ -189,8 +206,27 @@ public class ItemFormController  implements Initializable {
 
     }
 
+    private void loadDayAndDateAndTime(){
+        Date date = new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
+        lblCurrentDate.setText(dateFormat.format(date));
+
+        lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
+
+        Timeline timeline=new Timeline(new KeyFrame(Duration.ZERO, event -> {
+            LocalTime now=LocalTime.now();
+            lblCurrentTime.setText(now.getHour()+":"+now.getMinute()+":"+now.getSecond());
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
+        loadDayAndDateAndTime();
     }
 }
