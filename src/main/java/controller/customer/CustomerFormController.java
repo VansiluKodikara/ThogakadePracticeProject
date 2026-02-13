@@ -16,17 +16,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import javafx.util.converter.LocalDateStringConverter;
 import model.Customer;
 
 import java.net.URL;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.*;
+import java.time.temporal.TemporalAccessor;
+import java.util.*;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable  {
     @FXML
@@ -240,9 +239,7 @@ public class CustomerFormController implements Initializable  {
     }
 
     private void loadDayAndDateAndTime(){
-        Date date=new Date();
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
-        lblCurrentDate.setText(dateFormat.format(date));
+        lblCurrentDate.setText(String.valueOf(LocalDate.now()));
 
         lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
 
