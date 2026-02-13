@@ -175,9 +175,7 @@ public class OrderFormController implements Initializable {
     }
 
     private void loadDateAndTime(){
-        Date date=new Date();
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
-        lblCurrentDate.setText(dateFormat.format(date));
+        lblCurrentDate.setText(String.valueOf(LocalDate.now()));
 
         lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
 

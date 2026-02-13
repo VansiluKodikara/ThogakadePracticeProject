@@ -207,9 +207,7 @@ public class ItemFormController implements Initializable {
     }
 
     private void loadDayAndDateAndTime(){
-        Date date = new Date();
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
-        lblCurrentDate.setText(dateFormat.format(date));
+        lblCurrentDate.setText(String.valueOf(LocalDate.now()));
 
         lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
 
