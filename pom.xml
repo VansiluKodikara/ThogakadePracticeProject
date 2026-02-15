@@ -18,15 +18,13 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>19.0.2</version>
+            <version>21.0.2</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>19.0.2</version>
+            <version>21.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>
@@ -39,8 +37,8 @@
             <artifactId>lombok</artifactId>
             <version>1.18.42</version>
         </dependency>
-        <dependency>
 
+        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.5.0</version>
