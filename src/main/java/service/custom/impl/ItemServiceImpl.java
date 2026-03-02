@@ -2,12 +2,15 @@ package service.custom.impl;
 
 import db.DBConnection;
 import model.Item;
+import repository.RepositoryFactory;
+import repository.customer.ItemRepository;
+import util.RepositoryType;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements ItemService {
     public boolean addItem(Item item) {
         try {
 

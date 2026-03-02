@@ -8,37 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService{
+
     @Override
-    public boolean addCustomer(Customer customer) {
+    public boolean addCustomer(Customer customer){
         try {
+            Connection connection=DBConnection.getInstance().getConnection();
 
-            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)");
 
-            PreparedStatement psTm = connection.prepareStatement("INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)");
+            preparedStatement.setString(1, customer.getId());
+            preparedStatement.setString(2, customer.getTitle());
+            preparedStatement.setString(3, customer.getName());
+            preparedStatement.setObject(4, customer.getDob());
+            preparedStatement.setDouble(5, customer.getSalary());
+            preparedStatement.setString(6, customer.getAddress());
+            preparedStatement.setString(7, customer.getCity());
+            preparedStatement.setString(8, customer.getProvince());
+            preparedStatement.setString(9, customer.getPostalCode());
 
-            psTm.setString(1, customer.getId());
-            psTm.setString(2, customer.getTitle());
-            psTm.setString(3, customer.getName());
-            psTm.setObject(4, customer.getDob());
-            psTm.setDouble(5, customer.getSalary());
-            psTm.setString(6, customer.getAddress());
-            psTm.setString(7, customer.getCity());
-            psTm.setString(8, customer.getProvince());
-            psTm.setString(9, customer.getPostalCode());
+            return preparedStatement.executeUpdate()>0;
 
-            return psTm.executeUpdate() > 0;
-
-        } catch (SQLException e) {
+        }catch (SQLException e){
             throw new RuntimeException(e);
         }
-
-
     }
 
     @Override
     public boolean updateCustomer(Customer customer) {
         return false;
-
     }
 
     @Override
@@ -87,6 +84,7 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
+
     @Override
     public List<Customer> getAll() {
         try {
@@ -94,7 +92,7 @@ public class CustomerServiceImpl implements CustomerService{
 
             Statement statement=connection.createStatement();
 
-            ResultSet resultSet=statement.executeQuery("SELECT * FROM customer");
+            ResultSet resultSet=statement.executeQuery("SELECT * FROM Customer");
 
             ArrayList<Customer> customerArrayList=new ArrayList<>();
 
