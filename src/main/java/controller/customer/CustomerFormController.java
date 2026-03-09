@@ -1,6 +1,7 @@
 package controller.customer;
 
 import TM.CustomerTM;
+import com.google.inject.Inject;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -18,6 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import javafx.util.converter.LocalDateStringConverter;
 import model.Customer;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import service.ServiceFactory;
+import service.custom.impl.CustomerService;
 
 import java.net.URL;
 import java.sql.*;
@@ -102,7 +109,10 @@ public class CustomerFormController implements Initializable  {
 
     @FXML
     private Label lblCurrentDay;
-
+/*
+    @Inject
+    CustomerService
+*/
     @FXML
     void btnAddCustomerOnAction(ActionEvent event) {
 
@@ -266,14 +276,31 @@ public class CustomerFormController implements Initializable  {
         loadDayAndDateAndTime();
     }
     public void setTextValue(Customer customer){
-         txtId.setText(customer.getId());
-         cmbTitle.setValue(customer.getTitle());
-         txtName.setText(customer.getName());
-         dateDob.setValue(customer.getDob());
-         txtSalary.setText(customer.getSalary().toString());
-         txtAddress.setText(customer.getAddress());
-         txtCity.setText(customer.getCity());
-         txtProvince.setText(customer.getProvince());
-         txtPostalCode.setText(customer.getPostalCode());
+        txtId.setText(customer.getId());
+        cmbTitle.setValue(customer.getTitle());
+        txtName.setText(customer.getName());
+        dateDob.setValue(customer.getDob());
+        txtSalary.setText(customer.getSalary().toString());
+        txtAddress.setText(customer.getAddress());
+        txtCity.setText(customer.getCity());
+        txtProvince.setText(customer.getProvince());
+        txtPostalCode.setText(customer.getPostalCode());
+    }
+
+    public void btnExportReceiptOnAction(ActionEvent actionEvent) {
+        try {
+
+            JasperDesign design=JRXmlLoader.load("src/main/resources/report/customers-report.jrxml");
+            JasperReport report=JasperCompileManager.compileReport(design);
+
+            JasperPrint print=JasperFillManager.fillReport(report,null,DBConnection.getInstance().getConnection());
+
+            JasperExportManager.exportReportToPdfFile(print,"Customer Report.pdf");
+
+            JasperViewer.viewReport(print,false);
+
+        }catch (JRException | SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
