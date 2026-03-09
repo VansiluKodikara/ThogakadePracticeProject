@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -20,20 +21,20 @@
             </font>
         </Label>
         <JFXTextField fx:id="txtId" layoutX="35.0" layoutY="86.0" promptText="ID" />
-        <JFXComboBox fx:id="cmbTitle" layoutX="205.0" layoutY="86.0" prefHeight="25.0" prefWidth="135.0" promptText="Title" />
-        <JFXTextField fx:id="txtName" layoutX="372.0" layoutY="86.0" promptText="Name" />
-        <DatePicker fx:id="dateDob" layoutX="534.0" layoutY="86.0" prefHeight="25.0" prefWidth="135.0" promptText="DOB" />
+        <JFXComboBox fx:id="cmbTitle" layoutX="217.0" layoutY="86.0" prefHeight="25.0" prefWidth="135.0" promptText="Title" />
+        <JFXTextField fx:id="txtName" layoutX="395.0" layoutY="86.0" promptText="Name" />
+        <DatePicker fx:id="dateDob" layoutX="565.0" layoutY="86.0" prefHeight="25.0" prefWidth="135.0" promptText="DOB" />
         <JFXTextField fx:id="txtSalary" layoutX="35.0" layoutY="153.0" promptText="Salary" />
-        <JFXTextField fx:id="txtAddress" layoutX="205.0" layoutY="152.0" promptText="Address" />
-        <JFXTextField fx:id="txtCity" layoutX="372.0" layoutY="151.0" promptText="City" />
-        <JFXTextField fx:id="txtProvince" layoutX="534.0" layoutY="151.0" promptText="Province" />
+        <JFXTextField fx:id="txtAddress" layoutX="217.0" layoutY="152.0" promptText="Address" />
+        <JFXTextField fx:id="txtCity" layoutX="395.0" layoutY="151.0" promptText="City" />
+        <JFXTextField fx:id="txtProvince" layoutX="565.0" layoutY="151.0" promptText="Province" />
         <JFXTextField fx:id="txtPostalCode" layoutX="35.0" layoutY="220.0" promptText="Postal Code" />
-        <JFXButton fx:id="btnAddCustomer" layoutX="576.0" layoutY="219.0" onAction="#btnAddCustomerOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #27ae60;" text="Add Customer" textFill="WHITE">
+        <JFXButton fx:id="btnAddCustomer" layoutX="606.0" layoutY="203.0" onAction="#btnAddCustomerOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #27ae60;" text="Add Customer" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="btnReload" layoutX="473.0" layoutY="220.0" onAction="#btnReloadOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #f1c40f;" text="Reload" textFill="WHITE">
+        <JFXButton fx:id="btnReload" layoutX="499.0" layoutY="203.0" onAction="#btnReloadOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #f1c40f;" text="Reload" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -50,12 +51,12 @@
                 <TableColumn fx:id="colPostalCode" prefWidth="75.0" text="Postal Code" />
             </columns>
         </TableView>
-        <JFXButton fx:id="btnDelete" layoutX="368.0" layoutY="220.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #c0392b;" text="Delete" textFill="WHITE">
+        <JFXButton fx:id="btnDelete" layoutX="392.0" layoutY="204.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #c0392b;" text="Delete" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="btnSearch" layoutX="261.0" layoutY="220.0" onAction="#btnSearchOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #3498db;" text="Search" textFill="WHITE">
+        <JFXButton fx:id="btnSearch" layoutX="284.0" layoutY="204.0" onAction="#btnSearchOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #3498db;" text="Search" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -63,5 +64,10 @@
       <Label fx:id="lblCurrentDate" layoutX="634.0" layoutY="5.0" text="dd/mm/yyyy" textFill="WHITE" />
       <Label fx:id="lblCurrentTime" layoutX="645.0" layoutY="26.0" text="00:00:00" textFill="WHITE" />
       <Label fx:id="lblCurrentDay" layoutX="562.0" layoutY="17.0" text="Day" textFill="WHITE" />
+      <Button layoutX="445.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnExportReceiptOnAction" style="-fx-background-color: #9b59b6;" text="Export Receipt" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
