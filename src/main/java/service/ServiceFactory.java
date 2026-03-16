@@ -14,11 +14,11 @@ public class ServiceFactory {
         return instance==null?instance=new ServiceFactory():instance;
     }
 
-    public <Type extends SuperService>Type getServiceType(ServiceType serviceType){
+    public <T extends SuperService>T getServiceType(ServiceType serviceType){
         switch(serviceType){
-            case CUSTOMER:return (Type) new CustomerServiceImpl();
-            case ITEM:return (Type) new ItemServiceImpl();
-            case ORDER:return (Type) new OrderServiceImpl();
+            case CUSTOMER:return (T) new CustomerServiceImpl();
+            case ITEM:return (T) new ItemServiceImpl();
+            case ORDER:return (T) new OrderServiceImpl();
         }
         return null;
     }

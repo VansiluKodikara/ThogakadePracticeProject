@@ -1,58 +1,48 @@
 package controller.customer;
 
-import TM.CustomerTM;
-import com.google.inject.Inject;
-import com.jfoenix.controls.JFXButton;
+
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+
+import jakarta.inject.Inject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Duration;
-import javafx.util.converter.LocalDateStringConverter;
 import model.Customer;
+import TM.CustomerTM;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import service.ServiceFactory;
 import service.custom.impl.CustomerService;
+import service.custom.impl.CustomerServiceImpl;
+import util.ServiceType;
 
 import java.net.URL;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.*;
-import java.time.temporal.TemporalAccessor;
-import java.util.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class CustomerFormController implements Initializable  {
-    @FXML
-    private JFXButton btnAddCustomer;
+public class CustomerFormController implements Initializable {
 
-    @FXML
-    private JFXButton btnDelete;
-
-    @FXML
-    private JFXButton btnReload;
-
-    @FXML
-    private JFXButton btnSearch;
     @FXML
     private JFXComboBox cmbTitle;
 
     @FXML
     private TableColumn colAddress;
-    @FXML
-    private TableView tableCustomers;
+
     @FXML
     private TableColumn colCity;
 
@@ -101,181 +91,124 @@ public class CustomerFormController implements Initializable  {
     @FXML
     private JFXTextField txtSalary;
 
-    @FXML
-    private Label lblCurrentDate;
-
-    @FXML
-    private Label lblCurrentTime;
-
-    @FXML
-    private Label lblCurrentDay;
-/*
+    /*
     @Inject
-    CustomerService
-*/
+    CustomerService serviceType;
+    */
+
+    CustomerService serviceType = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+
+        cmbTitle.setItems(
+                FXCollections.observableArrayList(
+                        Arrays.asList("Mr", "Miss", "Ms")
+                )
+        );
+
+        loadTable();
+
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observableValue, o, t1) -> {
+
+            assert t1 != null;
+
+            CustomerTM customerTM = (CustomerTM) t1;
+
+            Customer customer = new Customer(
+                    customerTM.getId(),
+                    customerTM.getName(),
+                    customerTM.getName(),
+                    customerTM.getDob(),
+                    customerTM.getSalary(),
+                    customerTM.getAddress(),
+                    customerTM.getCity(),
+                    customerTM.getProvince(),
+                    customerTM.getPostalCode()
+            );
+
+            setTextToValues(customer);
+        });
+    }
+
     @FXML
     void btnAddCustomerOnAction(ActionEvent event) {
-
         String id = txtId.getText();
-        String title = cmbTitle.getValue().toString();
         String name = txtName.getText();
-        LocalDate dob = dateDob.getValue();
+        String title = cmbTitle.getValue().toString();
+        LocalDate dobValue = dateDob.getValue();
         Double salary = Double.parseDouble(txtSalary.getText());
         String address = txtAddress.getText();
         String city = txtCity.getText();
         String province = txtProvince.getText();
         String postalCode = txtPostalCode.getText();
-        Customer customer = new Customer(id, name,title, dob, salary,address, city, province, postalCode);
+
+        Customer customer = new Customer(id, name, title, dobValue, salary, address, city, province, postalCode);
+
         System.out.println(customer);
 
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            System.out.println("Connection " + connection);
-            PreparedStatement psTm = connection.prepareStatement("INSERT INTO Customer values (?,?,?,?,?,?,?,?,?) ");
-            psTm.setString(1,customer.getId());
-            psTm.setString(2,customer.getTitle());
-            psTm.setString(3,customer.getName());
-            psTm.setObject(4,customer.getDob());
-            psTm.setDouble(5,customer.getSalary());
-            psTm.setString(6,customer.getAddress());
-            psTm.setString(7,customer.getCity());
-            psTm.setString(8,customer.getProvince());
-            psTm.setString(9,customer.getPostalCode());
-
-
-            if (psTm.executeUpdate()>0) {
-                    new Alert(Alert.AlertType.INFORMATION,"Customer Added").show();
-                    loadTable();
-            }
-            else{
-    new Alert(Alert.AlertType.ERROR,"Customer Not Added").show();
+            if (serviceType.addCustomer(customer)) {
+                new Alert(Alert.AlertType.INFORMATION, "Customer Added !").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Customer not Added !").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     @FXML
     void btnReloadOnAction(ActionEvent event) {
         loadTable();
     }
 
-    private void loadTable() throws RuntimeException {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
-        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
-        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        ArrayList<CustomerTM> customerArrayList = new ArrayList<>();
+    public void loadTable() {
+        List<Customer> all = serviceType.getAll();
+        ArrayList<CustomerTM> customerTMArrayList = new ArrayList<>();
 
-
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            System.out.println("Connection " + connection);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Customer");
-
-            System.out.println(resultSet);
-            while (resultSet.next()){
-                customerArrayList.add(
-                        new CustomerTM(
-                                resultSet.getString(1),
-                                resultSet.getString(2),
-                                resultSet.getString(3),
-                                resultSet.getDate(4),
-                                resultSet.getDouble(5),
-                                resultSet.getString(6),
-                                resultSet.getString(7),
-                                resultSet.getString(8),
-                                resultSet.getString(9)
-                        )
-                );
-            }
-
-            ObservableList<CustomerTM> observableList = FXCollections.observableArrayList(customerArrayList);
-            tblCustomers.setItems(observableList);
-
-
-
-
-        } catch (SQLException e) {
-            System.out.println("Cannot run");
-            throw new RuntimeException(e);
-
-        }
-
-
+        all.forEach(customer -> {
+            customerTMArrayList.add(new CustomerTM(
+                    customer.getId(),
+                    customer.getTitle(),
+                    customer.getName(),
+                    customer.getDob(),
+                    customer.getSalary(),
+                    customer.getAddress(),
+                    customer.getCity(),
+                    customer.getProvince(),
+                    customer.getPostalCode()
+            ));
+        });
+        tblCustomers.setItems(FXCollections.observableArrayList(customerTMArrayList));
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        if (serviceType.deleteCustomer(txtId.getText())) {
+            new Alert(Alert.AlertType.INFORMATION, "Customer Deleted!").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Customer NOT Deleted!").show();
+        }
+    }
+
+    public void btnSearchOnAction(ActionEvent actionEvent) {
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-
-            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Customer WHERE CustID=?");
-            psTm.setString(1,txtId.getText());
-
-            if(psTm.executeUpdate()>0){
-                new Alert(Alert.AlertType.INFORMATION,"Customer Deleted!").show();
-                loadTable();
-            }
+            setTextToValues(serviceType.searchCustomerById(txtId.getText()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void btnSearchOnAction(ActionEvent actionEvent) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Customer WHERE CustId=?");
-        psTm.setString(1,txtId.getText());
-        ResultSet resultSet = psTm.executeQuery();
-        resultSet.next();
-        Customer customer = new Customer(
-                resultSet.getString(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getDate(4).toLocalDate(),
-                resultSet.getDouble(5),
-                resultSet.getString(6),
-                resultSet.getString(7),
-                resultSet.getString(8),
-                resultSet.getString(9)
-        );
-        setTextValue(customer);
-    }
-
-    private void loadDayAndDateAndTime(){
-        lblCurrentDate.setText(String.valueOf(LocalDate.now()));
-
-        lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
-
-        Timeline timeline=new Timeline(new KeyFrame(Duration.ZERO, event -> {
-            LocalTime now=LocalTime.now();
-            lblCurrentTime.setText(now.getHour()+":"+now.getMinute()+":"+now.getSecond());
-        }),
-                new KeyFrame(Duration.seconds(1))
-        );
-
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.play();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        cmbTitle.setItems(
-                FXCollections.observableArrayList(
-                        Arrays.asList("Mr","Miss","Ms")
-                )
-        );
-
-        loadTable();
-        loadDayAndDateAndTime();
-    }
-    public void setTextValue(Customer customer){
+    private void setTextToValues(Customer customer) {
         txtId.setText(customer.getId());
         cmbTitle.setValue(customer.getTitle());
         txtName.setText(customer.getName());
@@ -287,19 +220,20 @@ public class CustomerFormController implements Initializable  {
         txtPostalCode.setText(customer.getPostalCode());
     }
 
+
     public void btnExportReceiptOnAction(ActionEvent actionEvent) {
         try {
 
-            JasperDesign design=JRXmlLoader.load("src/main/resources/report/customers-report.jrxml");
-            JasperReport report=JasperCompileManager.compileReport(design);
+            JasperDesign design = JRXmlLoader.load("src/main/resources/report/customers-report.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
 
-            JasperPrint print=JasperFillManager.fillReport(report,null,DBConnection.getInstance().getConnection());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
 
-            JasperExportManager.exportReportToPdfFile(print,"Customer Report.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint,"customer-report.pdf");
 
-            JasperViewer.viewReport(print,false);
+            JasperViewer.viewReport(jasperPrint,false);
 
-        }catch (JRException | SQLException e){
+        } catch (JRException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
