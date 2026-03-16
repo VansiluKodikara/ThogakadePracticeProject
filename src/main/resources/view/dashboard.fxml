@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <children>
       <Rectangle fx:id="lblCredits" arcHeight="5.0" arcWidth="5.0" fill="#c7c7c7" height="563.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
       <Button layoutX="29.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnCustomerFormOnAction" style="-fx-background-color: #74b9ff;" text="Customer Form">
