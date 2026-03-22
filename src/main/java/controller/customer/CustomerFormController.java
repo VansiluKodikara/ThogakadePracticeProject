@@ -6,16 +6,16 @@ import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
 
 import jakarta.inject.Inject;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import model.Customer;
 import TM.CustomerTM;
 import net.sf.jasperreports.engine.*;
@@ -30,6 +30,7 @@ import util.ServiceType;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,6 +92,15 @@ public class CustomerFormController implements Initializable {
     @FXML
     private JFXTextField txtSalary;
 
+    @FXML
+    private Label lblCurrentDate;
+
+    @FXML
+    private Label lblCurrentDay;
+
+    @FXML
+    private Label lblCurrentTime;
+
     /*
     @Inject
     CustomerService serviceType;
@@ -138,6 +148,9 @@ public class CustomerFormController implements Initializable {
 
             setTextToValues(customer);
         });
+
+        loadDayAndDateAndTime();
+
     }
 
     @FXML
@@ -236,5 +249,22 @@ public class CustomerFormController implements Initializable {
         } catch (JRException | SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void loadDayAndDateAndTime(){
+        lblCurrentDate.setText(String.valueOf(LocalDate.now()));
+
+        lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
+
+        Timeline timeline=new Timeline(new KeyFrame(Duration.ZERO, event -> {
+            LocalTime now=LocalTime.now();
+            lblCurrentTime.setText(now.getHour()+":"+now.getMinute()+":"+now.getSecond());
+        }),
+            new KeyFrame(Duration.seconds(1))
+        );
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
     }
 }
