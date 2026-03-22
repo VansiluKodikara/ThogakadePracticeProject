@@ -251,7 +251,7 @@ public class CustomerFormController implements Initializable {
         }
     }
 
-    private void loadDayAndDateAndTime(){
+    private void loadDayAndDateAndTime(){ //loadDayAndDateAndTime is on top in initialize
         lblCurrentDate.setText(String.valueOf(LocalDate.now()));
 
         lblCurrentDay.setText(LocalDate.now().getDayOfWeek().name());
