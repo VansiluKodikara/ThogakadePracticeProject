@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="555.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.order.OrderFormController">
+<AnchorPane prefHeight="555.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.order.OrderFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="52.0" stroke="BLACK" strokeType="INSIDE" width="708.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="52.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="692.0" />
       <Label alignment="CENTER" layoutX="294.0" layoutY="11.0" prefHeight="30.0" prefWidth="119.0" text="Order Form" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="20.0" />
@@ -39,7 +39,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tableOrders" editable="true" layoutX="37.0" layoutY="181.0" prefHeight="367.0" prefWidth="616.0">
+      <TableView fx:id="tableOrders" editable="true" layoutX="37.0" layoutY="181.0" prefHeight="367.0" prefWidth="616.0" stylesheets="@../css/style.css">
         <columns>
           <TableColumn fx:id="colOrderId" prefWidth="200.66665649414062" text="Order ID" />
           <TableColumn fx:id="colOrderDate" minWidth="0.0" prefWidth="218.66668701171875" text="Order Date" />
