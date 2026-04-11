@@ -1,8 +1,10 @@
 package repository.customer.impl;
 
 import model.Customer;
+import org.hibernate.Session;
 import repository.customer.CustomerRepository;
 import util.CrudUtil;
+import util.HibernateUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +13,17 @@ import java.util.List;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
-    public boolean create(Customer customer) throws SQLException {
+    public boolean create(Customer customer) {
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.persist(customer);
+        session.getTransaction().commit();
+        session.close();
+
+        return true;
+
+        /*
         try {
 
             return CrudUtil.execute("INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)",
@@ -27,6 +39,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        */
     }
 
     @Override
