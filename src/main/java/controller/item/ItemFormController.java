@@ -116,7 +116,7 @@ public class ItemFormController implements Initializable {
     void btnDeleteOnAction(ActionEvent event) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Item where id=? ");
+            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Item where ItemCode=? ");
             psTm.setString(1,txtItemCode.getText());
 
             if(psTm.executeUpdate()>0){
@@ -134,14 +134,16 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnReloadOnAction(ActionEvent event) {
+
     loadTable();
+
     }
 
     @FXML
     void btnSearchOnAction(ActionEvent event) throws SQLException {
 
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Item where id=?");
+            PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Item where ItemCode=?");
             psTm.setString(1,txtItemCode.getText());
             ResultSet resultSet = psTm.executeQuery();
             resultSet.next();
@@ -174,10 +176,10 @@ public class ItemFormController implements Initializable {
 
     private void loadTable(){
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("ItemCode"));
-        colPckSize.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("PackSize"));
-        colQOnHand.setCellValueFactory(new PropertyValueFactory<>("UnitPrice"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("QtyOnHand"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        colPckSize.setCellValueFactory(new PropertyValueFactory<>("PackSize"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("UnitPrice"));
+        colQOnHand.setCellValueFactory(new PropertyValueFactory<>("QtyOnHand"));
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();

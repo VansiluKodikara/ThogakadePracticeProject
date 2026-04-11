@@ -7,7 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 
 public class DashboardController {
@@ -64,6 +66,17 @@ public class DashboardController {
             throw new RuntimeException();
         }
 
+    }
+
+    @FXML
+    private void openCreatorLink(ActionEvent event){
+        String url = "https://github.com/VansiluKodikara";
+
+        try{
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

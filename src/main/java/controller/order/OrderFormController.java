@@ -71,10 +71,11 @@ public class OrderFormController implements Initializable {
         String OrderId = txtOrderId.getText();
         LocalDate OrderDate = dateOrderDate.getValue();
         String CustomerId = txtCustomerId.getText();
+
         Order order = new Order(OrderId, OrderDate, CustomerId.toString());
 
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("INSERT INTO Orders values(?,?,?,?,?)");
+        PreparedStatement psTm = connection.prepareStatement("INSERT INTO Orders values(?,?,?)");
         System.out.println(connection);
         System.out.println("connected to DB");
         psTm.setString(1,order.getOrderId());
@@ -96,7 +97,7 @@ public class OrderFormController implements Initializable {
     void btnDeleteOnAction(ActionEvent event) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Orders where id=? ");
+            PreparedStatement psTm = connection.prepareStatement("DELETE FROM Orders where OrderId=? ");
             psTm.setString(1, txtOrderId.getText());
 
             if(psTm.executeUpdate()>0){
@@ -121,7 +122,7 @@ public class OrderFormController implements Initializable {
     void btnSearchOnAction(ActionEvent event) throws SQLException {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Orders where id=?");
+        PreparedStatement psTm = connection.prepareStatement("SELECT * FROM Orders where OrderId=?");
         psTm.setString(1, txtOrderId.getText());
         ResultSet resultSet = psTm.executeQuery();
         resultSet.next();
@@ -146,7 +147,7 @@ public class OrderFormController implements Initializable {
     private void loadTable(){
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("OrderId"));
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("OrderDate"));
-        colCustId.setCellValueFactory(new PropertyValueFactory<>("CustomerId"));
+        colCustId.setCellValueFactory(new PropertyValueFactory<>("CustId"));
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();

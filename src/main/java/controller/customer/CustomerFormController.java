@@ -1,11 +1,11 @@
 package controller.customer;
 
 
+import com.google.inject.Inject;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
 
-import jakarta.inject.Inject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -105,7 +105,6 @@ public class CustomerFormController implements Initializable {
     @Inject
     CustomerService serviceType;
     */
-
     CustomerService serviceType = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
 
     @Override
@@ -156,8 +155,8 @@ public class CustomerFormController implements Initializable {
     @FXML
     void btnAddCustomerOnAction(ActionEvent event) {
         String id = txtId.getText();
-        String name = txtName.getText();
         String title = cmbTitle.getValue().toString();
+        String name = txtName.getText();
         LocalDate dobValue = dateDob.getValue();
         Double salary = Double.parseDouble(txtSalary.getText());
         String address = txtAddress.getText();
@@ -165,7 +164,7 @@ public class CustomerFormController implements Initializable {
         String province = txtProvince.getText();
         String postalCode = txtPostalCode.getText();
 
-        Customer customer = new Customer(id, name, title, dobValue, salary, address, city, province, postalCode);
+        Customer customer = new Customer(id, title, name, dobValue, salary, address, city, province, postalCode);
 
         System.out.println(customer);
 

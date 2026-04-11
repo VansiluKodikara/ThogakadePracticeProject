@@ -11,8 +11,8 @@
 
 <AnchorPane prefHeight="555.0" prefWidth="708.0" style="-fx-background-color: 08CB00;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.item.ItemFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="49.0" layoutX="17.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="675.0" />
-      <Label alignment="CENTER" layoutX="26.0" layoutY="9.0" prefHeight="25.0" prefWidth="656.0" text="Item Form" textFill="#fffdfd">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002140" height="49.0" layoutX="17.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="692.0" />
+      <Label alignment="CENTER" layoutX="26.0" layoutY="9.0" prefHeight="30.0" prefWidth="620.0" text="Item Form" textFill="#fffdfd">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
